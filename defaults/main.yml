@@ -122,3 +122,6 @@ rsyslog_imuxsock_syssock: no
 #   - gnutls
 #   - elastisearch
 rsyslog_features: []
+# overwrite settings for systemd
+
+rsyslog_systemd_options: []

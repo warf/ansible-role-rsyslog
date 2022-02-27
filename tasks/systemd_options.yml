@@ -1,0 +1,13 @@
+---
+- name: configure systemd open files limits
+  ini_file:
+    path: /etc/systemd/system/rsyslog.service.d/override.conf
+    section: "Service"
+    option: "{{ item.name }}"
+    value: "{{ item.value }}"
+    create: true
+    no_extra_spaces: true
+  loop: '{{ rsyslog_systemd_options }}'
+  notify:
+    - systemd daemon reload
+    - restart rsyslog
