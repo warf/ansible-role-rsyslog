@@ -10,19 +10,19 @@
 #################
 
 # The imjournal module bellow is now used as a message source instead of imuxsock.
-{{ '#' if not 'imuxsock'  in rsyslog_mods else '' }}$ModLoad imuxsock  # provides support for local system logging (e.g. via logger command)
-{{ '#' if not 'imjournal' in rsyslog_mods else '' }}$ModLoad imjournal # provides access to the systemd journal
-{{ '#' if not 'imklog'    in rsyslog_mods else '' }}$ModLoad imklog    # provides kernel logging support
-{{ '#' if not 'immark'    in rsyslog_mods else '' }}$ModLoad immark    # provides --MARK-- message capability
-{{ '#' if not 'imfile'    in rsyslog_mods else '' }}$ModLoad imfile    # provides access to specific log file
+{{ '# ' if not 'imuxsock'  in rsyslog_mods else '' }}$ModLoad imuxsock  # provides support for local system logging (e.g. via logger command)
+{{ '# ' if not 'imjournal' in rsyslog_mods else '' }}$ModLoad imjournal # provides access to the systemd journal
+{{ '# ' if not 'imklog'    in rsyslog_mods else '' }}$ModLoad imklog    # provides kernel logging support
+{{ '# ' if not 'immark'    in rsyslog_mods else '' }}$ModLoad immark    # provides --MARK-- message capability
+{{ '# ' if not 'imfile'    in rsyslog_mods else '' }}$ModLoad imfile    # provides access to specific log file
 
 # provides UDP syslog reception
-{{ '' if rsyslog_receiver else '#' }}$ModLoad imudp
-{{ '' if rsyslog_receiver else '#' }}$UDPServerRun 514
+{{ '' if rsyslog_receiver else '# ' }}$ModLoad imudp
+{{ '' if rsyslog_receiver else '# ' }}$UDPServerRun 514
 
 # provides TCP syslog reception
-{{ '' if rsyslog_receiver else '#' }}$ModLoad imtcp
-{{ '' if rsyslog_receiver else '#' }}$InputTCPServerRun 514
+{{ '' if rsyslog_receiver else '# ' }}$ModLoad imtcp
+{{ '' if rsyslog_receiver else '# ' }}$InputTCPServerRun 514
 
 
 ###########################
@@ -68,12 +68,12 @@ $PreserveFQDN on
 # Turn off message reception via local log socket;
 # local messages are retrieved through imjournal now.
 #
-{{ '#' if 'imuxsock' in rsyslog_mods else '' }}$OmitLocalLogging on
+{{ '# ' if 'imuxsock' in rsyslog_mods else '' }}$OmitLocalLogging on
 
 #
 # File to store the position in the journal
 #
-{{ '#' if not 'imjournal' in rsyslog_mods else '' }}$IMJournalStateFile imjournal.state
+{{ '# ' if not 'imjournal' in rsyslog_mods else '' }}$IMJournalStateFile imjournal.state
 
 ###############
 #### RULES ####
