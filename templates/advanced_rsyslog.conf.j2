@@ -16,24 +16,24 @@
 
 # Provides access to the systemd journal
 # And provides file to store the position in the journal
-{{ '' if 'imjournal' in rsyslog_mods else '#' }}module(load="imjournal" StateFile="imjournal.state"{{ ' WorkAroundJournalBug="on"' if rsyslog_workaroundjournalbug else '' }})
+{{ '' if 'imjournal' in rsyslog_mods else '# ' }}module(load="imjournal" StateFile="imjournal.state"{{ ' WorkAroundJournalBug="on"' if rsyslog_workaroundjournalbug else '' }})
 
 # provides kernel logging support and enable non-kernel klog messages
-{{ '' if 'imklog' in rsyslog_mods else '#' }}module(load="imklog" permitnonkernelfacility="on")
+{{ '' if 'imklog' in rsyslog_mods else '# ' }}module(load="imklog" permitnonkernelfacility="on")
 
 # provides --MARK-- message capability
-{{ '' if 'immark' in rsyslog_mods else '#' }}module(load="immark")
+{{ '' if 'immark' in rsyslog_mods else '# ' }}module(load="immark")
 
 # provides access to specific log file
-{{ '' if 'imfile' in rsyslog_mods else '#' }}module(load="imfile")
+{{ '' if 'imfile' in rsyslog_mods else '# ' }}module(load="imfile")
 
 # provides UDP syslog reception
-{{ '' if rsyslog_receiver else '#' }}module(load="imudp") # needs to be done just once
-{{ '' if rsyslog_receiver else '#' }}input(type="imudp" port="514")
+{{ '' if rsyslog_receiver else '# ' }}module(load="imudp") # needs to be done just once
+{{ '' if rsyslog_receiver else '# ' }}input(type="imudp" port="514")
 
 # provides TCP syslog reception
-{{ '' if rsyslog_receiver else '#' }}module(load="imtcp") # needs to be done just once
-{{ '' if rsyslog_receiver else '#' }}input(type="imtcp" port="514")
+{{ '' if rsyslog_receiver else '# ' }}module(load="imtcp") # needs to be done just once
+{{ '' if rsyslog_receiver else '# ' }}input(type="imtcp" port="514")
 
 #
 # Set defaults for all log files.
